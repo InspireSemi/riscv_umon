@@ -158,6 +158,17 @@ _start:
 
 	nop
 
+#define BOOT_HART 0x3f /* 0x1dd2 */
+
+  csrr a0, mhartid
+  li   a1, BOOT_HART
+  beq  a0, a1, hart0_entry
+42:
+	wfi					
+  	j 42b
+hart0_entry:
+
+
 	jal   init_uart
 
 	li	s6,0			/* Clear option flags */
@@ -196,15 +207,7 @@ _start:
 	jal printreg
 	prcrlf
 
-#define BOOT_HART 0x1dd2
 
-  csrr a0, mhartid
-  li   a1, BOOT_HART
-  beq  a0, a1, hart0_entry
-42:
-	wfi					
-  	j 42b
-hart0_entry:
 
 
 /*	prstr("\n\rBuild Time: ") */

@@ -39,7 +39,7 @@ GLOBAL(init_uart)
 	1041000: 2 = 0x02 Sim Only 
 	*/
 
-	li	t1,0x02			/*  Change based on the crystal/baud rate. &&&&&*/
+	li	t1,0x01			/*  Change based on the crystal/baud rate. &&&&&*/
 	and	t1,t1,0xff		/*  first drop the upper byte of the half word */
 	sb	t1,UART_DLL(a0)	/*  store divisor LSB in DLL */
 
