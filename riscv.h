@@ -1,6 +1,3 @@
-/* Copyright (c) 2020 CryptoCore LLC. */
-
-
 #ifdef __ASSEMBLER__
 #define _AC(X,Y)        X
 #else
