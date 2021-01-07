@@ -69,8 +69,10 @@ Gobal Defines
 #define REG_16		2
 #define REG_8		1
 
-#define UART0_CTRL_ADDR _AC(0x2EE00000,UL)
-#define  UART_BASE UART0_CTRL_ADDR
+#define UARTF_CTRL_ADDR _AC(0x2F208700,UL)
+
+#define UART0_CTRL_ADDR _AC(0x2F208000,UL)
+#define  UART_BASE UARTF_CTRL_ADDR
 #define UART0_CTRL_SIZE _AC(0x10,UL)
 
 /* Register offsets */
