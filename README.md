@@ -1,7 +1,7 @@
 <h1>Why use uMON?</h1>
 
 In bringing up a new SOC there are many challenges.  You need a good part of the system up and<br>
-runnign prior to having any kind of console/debug monitor.  This is normally because you need <br>
+running prior to having any kind of console/debug monitor.  This is normally because you need <br>
 a good part of the SOC functional before you can run code.  uMON helps you to debug your SOC<br>
 earlier in the process.  uMON just requires a boot device, working uart and the SOC.  It uses the<br>
 registers in the SOC as a stack for input from the console(UART).  It can then execute a number of<br>
