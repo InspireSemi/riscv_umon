@@ -1,6 +1,6 @@
 <h1>Why use uMON?</h1>
 
-in bringing up a new SOC there are many challenges.  You need a good part of the system up and<br>
+In bringing up a new SOC there are many challenges.  You need a good part of the system up and<br>
 runnign prior to having any kind of console/debug monitor.  This is normally because you need <br>
 a good part of the SOC functional before you can run code.  uMON helps you to debug your SOC<br>
 earlier in the process.  uMON just requires a boot device, working uart and the SOC.  It uses the<br>
