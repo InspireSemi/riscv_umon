@@ -36,14 +36,15 @@ GLOBAL(init_uart)
 	38400: 54 = 0x36
 	57600: 36 = 0x24
 	115200: 18 = 0x12 
-	1041000: 2 = 0x02 Sim Only 
+	3125000: 2 = 0x02 Sim Only
+	1.6GB:1 = fast uart SIM Only  
 	*/
 
-	li	t1,0x01			/*  Change based on the crystal/baud rate. &&&&&*/
+	li	t1,0x01		/*  Change based on the crystal/baud rate. &&&&&*/
 	and	t1,t1,0xff		/*  first drop the upper byte of the half word */
 	sb	t1,UART_DLL(a0)	/*  store divisor LSB in DLL */
 
-	li	t1,0x02				/*  Change based on the crystal/baud rate. &&&&&*/
+	li	t1,0x01				/*  Change based on the crystal/baud rate. &&&&&*/
 	srl	t1,t1,8				/*  shift right 8 bits to move upper byte into lower byte */
 	sb	t1,UART_DLM(a0)		/*  store divisor MSB in DLM */
 	
