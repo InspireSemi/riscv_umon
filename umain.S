@@ -158,7 +158,7 @@ _start:
 
 	nop
 
-#define BOOT_HART 0x3f /* 0x1dd2 */
+#define BOOT_HART 0x00 /* RC2 Boot Hart is now CL00, CR00 */
 
   csrr a0, mhartid
   li   a1, BOOT_HART
