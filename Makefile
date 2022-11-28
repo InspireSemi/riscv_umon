@@ -15,8 +15,15 @@ elf: umon.elf
 
 asm: umon.asm
 
+ifdef CR116
 umon.elf: umon.o umon.lds
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(filter %.o,$^) -T$(filter %.lds,$^)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(filter %.o,$^) -T umon_cr116.lds
+else
+umon.elf: umon.o umon.lds
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(filter %.o,$^) -T umon.lds
+endif
+
+# -T$(filter %.lds,$^)
 
 %.bin: %.elf
 	$(OBJCOPY) -S -R .comment -R .note.gnu.build-id -O binary $^ $@

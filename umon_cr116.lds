@@ -3,7 +3,7 @@ ENTRY(_start)
 
 MEMORY {               
   sram (rwx) : ORIGIN = 0x0000, LENGTH = 0x4000
-  maskrom_mem (rx) : ORIGIN = 0x00A3EE4000040000, LENGTH = 0x20000
+  maskrom_mem (rx) : ORIGIN = 0x0080012000000000, LENGTH = 0x20000
 }
 
 SECTIONS
