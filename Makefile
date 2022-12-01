@@ -9,6 +9,10 @@ CCASFLAGS=-I.
 
 LDFLAGS=-nostdlib -nostartfiles
 
+ifdef CR116
+CFLAGS += -DCR116 
+endif
+
 all: umon.bin
 
 elf: umon.elf

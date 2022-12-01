@@ -186,7 +186,7 @@ hart0_entry:
 	j	1b
 2:
 
-
+/*
 	la t3, datestring
 1:	lb	a0,0(t3)
 	beq	a0,zero,2f
@@ -199,7 +199,7 @@ hart0_entry:
 	jal prints
 	nop
 	prcrlf
-
+*/
 	la a1, hartidstring
 	jal prints
 	prcrlf
@@ -1419,7 +1419,7 @@ mbl:
 	nop
 	jal memerror
 	nop
-	j mbl
+	j	main_loop
 	nop
 	
 4:	addi t6,t6,1
@@ -1472,7 +1472,7 @@ mhl:
 	nop
 	jal memerror
 	nop
-	j mhl
+	j	main_loop
 	nop
 	
 4:	addi t6,t6,1
@@ -1524,7 +1524,7 @@ mwl:
 	nop
 	jal memerror
 	nop
-	j mwl
+	j	main_loop
 	nop	
 4:	addi t6,t6,1
 	addi t3,t3,4
@@ -1534,17 +1534,18 @@ mwl:
 
 
 memerror:
+	mv a1, t6
+	mv a2, t1
 	and t0,s6,1		/* test quiet flag */
 	beq	t0,zero,1f
-	jr	ra		/* quiet please!!!! */
+	j	main_loop	/* quiet please!!!! */
 1:
-	save
 /* 	prstr("Error at ") */
-	la t3, errotatstring
-1:	lb	a0,0(t3)
+	la t4, errotatstring
+1:	lb	a0,0(t4)
 	beq	a0,zero,2f
 	jal umon_conout
-	addi t3, t3,1
+	addi t4, t4,1
 	j	1b
 2:
 
@@ -1552,31 +1553,30 @@ memerror:
 	jal printreg
 
 /*	prstr(" read ") */
-	la t3, readstring
-1:	lb	a0,0(t3)
+	la t4, readstring
+1:	lb	a0,0(t4)
 	beq	a0,zero,2f
 	jal umon_conout
-	addi t3, t3,1
+	addi t4, t4,1
 	j	1b
 2:
 
-	mv	a0,t1
+	mv	a0,a2
 	jal printreg
 
 /*	prstr(" expected ") */
-	la t3, expectedstring
-1:	lb	a0,0(t3)
+	la t4, expectedstring
+1:	lb	a0,0(t4)
 	beq	a0,zero,2f
 	jal umon_conout
-	addi t3, t3,1
+	addi t4, t4,1
 	j	1b
 2:
 
-	mv	a0,t6
+	mv	a0,a1
 	jal printreg
 	prcrlf
-	jal kb_wait
-	return
+	j	main_loop
 
 
 /****************************************************************/

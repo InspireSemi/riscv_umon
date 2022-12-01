@@ -28,19 +28,10 @@ GLOBAL(init_uart)
 	li	t1,0x80
 	sb	t1,UART_LCR(a0)		/*  set DLAB (divisor latch access bit) to hi */
 
-	/* divisor latch values for buad rates at freq = 33.333Mhz
-	2400: 868 = 0x365
-	4800: 434 = 0x1B2
-	9600: 217 = 0xD9
-	19200: 108 = 0x6C 
-	38400: 54 = 0x36
-	57600: 36 = 0x24
-	115200: 18 = 0x12 
-	3125000: 2 = 0x02 Sim Only
-	1.6GB:1 = fast uart SIM Only  
-	*/
+	/* Divisor at 100Mhz for CR116 = 5 for a Baud Rate of 1,250,00 */
+	/* Change this for CR3664 .. SIM=1, real world = ? */
 
-	li	t1,0x01		/*  Change based on the crystal/baud rate. &&&&&*/
+	li	t1,0x05		/*  Change based on the crystal/baud rate. &&&&&*/
 	and	t1,t1,0xff		/*  first drop the upper byte of the half word */
 	sb	t1,UART_DLL(a0)	/*  store divisor LSB in DLL */
 
@@ -145,7 +136,7 @@ datestring:
 timesring:
 .string "\n\rBuild Time: "
 hellostring:
-.string	"\n\ruMON Port to RISC-V Hondo: Marc Karasek V1.0 64Bit"
+.string	"\n\ruMON V1.0"
 promptstring:
 .string " Type '^q' or 'q' to continue, '.' to terminate.\n\r"
 foundstring:
@@ -168,6 +159,8 @@ hartidstring:
 .string " HartID "
 trapentrystring:
 .string "Trap Entry "
+
+/* .string	"\n\ruMON Port to RISC-V Hondo: Marc Karasek V1.0 64Bit" */
 
 
 /*
