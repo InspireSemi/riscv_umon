@@ -24,18 +24,23 @@ GLOBAL(init_uart)
 	li	a0,UART_BASE
 	sb	zero,UART_IER(a0)	/*  disable interrupts */
 
-
 	li	t1,0x80
 	sb	t1,UART_LCR(a0)		/*  set DLAB (divisor latch access bit) to hi */
 
-	/* Divisor at 100Mhz for CR116 = 5 for a Baud Rate of 1,250,00 */
 	/* Change this for CR3664 .. SIM=1, real world = ? */
 
-	li	t1,0x05		/*  Change based on the crystal/baud rate. &&&&&*/
+	// Based on 20Mhz clock in FPGA
+	// Bit Rate DLL/DLM Error
+	// 19.2K	0x040	0.2%	
+	// 38.4K	0x020	1.4%	
+	// 76.8K	0x00F	1.7%
+	// 115.2K	0x00A	1.4%
+
+	li	t1,0x0a		/*  Change based on the crystal/baud rate. &&&&&*/
 	and	t1,t1,0xff		/*  first drop the upper byte of the half word */
 	sb	t1,UART_DLL(a0)	/*  store divisor LSB in DLL */
 
-	li	t1,0x01				/*  Change based on the crystal/baud rate. &&&&&*/
+	li	t1,0x00				/*  Change based on the crystal/baud rate. &&&&&*/
 	srl	t1,t1,8				/*  shift right 8 bits to move upper byte into lower byte */
 	sb	t1,UART_DLM(a0)		/*  store divisor MSB in DLM */
 	
